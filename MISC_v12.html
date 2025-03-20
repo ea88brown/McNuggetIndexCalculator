@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>McNugget Index Calculator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+        }
+
+        label {
+            display: inline-block;
+            width: 150px;
+        }
+
+        input[type="number"] {
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+    <h2>McNugget Index Calculator</h2>
+    <label>Gender:</label>
+    <input type="radio" id="male" name="gender" value="male" checked>
+    <label for="male">Male</label>
+    <input type="radio" id="female" name="gender" value="female">
+    <label for="female">Female</label><br><br>
+
+    <label id="waistHipLabel" for="waistHip">Waist (inches):</label>
+    <input type="number" id="waistHip"><br><br>
+
+    <label for="neck">Neck (inches):</label>
+    <input type="number" id="neck"><br><br>
+
+    <label for="height">Height (inches):</label>
+    <input type="number" id="height"><br><br>
+
+    <label for="weight">Weight (pounds):</label>
+    <input type="number" id="weight"><br><br>
+
+    <label for="idealBF">Ideal Body Fat %:</label>
+    <input type="number" id="idealBF"><br><br>
+
+    <button onclick="calculateMcNuggetIndex()">Calculate</button><br><br>
+
+    <div id="result"></div>
+
+    <script>
+        function calculateMcNuggetIndex() {
+            let gender = document.querySelector('input[name="gender"]:checked').value;
+            let waistHip = parseFloat(document.getElementById("waistHip").value);
+            let neck = parseFloat(document.getElementById("neck").value);
+            let height = parseFloat(document.getElementById("height").value);
+            let weight = parseFloat(document.getElementById("weight").value);
+            let idealBF = parseFloat(document.getElementById("idealBF").value);
+
+            // Update Label based on Gender
+            let waistHipLabel = document.getElementById("waistHipLabel");
+            if (gender === "male") {
+                waistHipLabel.textContent = "Waist (inches):";
+                document.getElementById('waistHip').setAttribute('placeholder', 'Waist');
+            } else {
+                waistHipLabel.textContent = "Hip (inches):";
+                document.getElementById('waistHip').setAttribute('placeholder', 'Hip');
+            }
+
+            let bodyFatPercentage;
+            if (gender === "male") {
+                bodyFatPercentage = 86.010 * Math.log10(waistHip - neck) - 70.041 * Math.log10(height) + 36.76;
+            } else {
+                bodyFatPercentage = 163.205 * Math.log10(waistHip + waistHip - neck) - 97.687 * Math.log10(height) - 78.387;
+            }
+
+            let fatMass = (bodyFatPercentage / 100) * weight;
+            let idealFatMass = (idealBF / 100) * weight;
+            let excessFatMass = fatMass - idealFatMass;
+
+            // Calculate number of McNuggets
+            let numMcNuggets = Math.round((excessFatMass * 3500) / 41);
+
+            document.getElementById("result").innerHTML = "You are <b>" + excessFatMass.toFixed(2) + "%</b> McNugget!<br><br><sub><i>This means you need to lose approximately: <b>" + numMcNuggets + " McNuggets</b> to reach your ideal body fat!</i></sub>";
+        }
+
+        // Add event listener to gender radio buttons
+        let genderRadios = document.querySelectorAll('input[name="gender"]');
+        genderRadios.forEach(radio => {
+            radio.addEventListener('change', calculateMcNuggetIndex);
+        });
+
+        //Call the function on load to set the correct label.
+        calculateMcNuggetIndex();
+    </script>
+</body>
+</html>
