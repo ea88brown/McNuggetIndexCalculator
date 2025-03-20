@@ -1,95 +1,349 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>McNugget Index Calculator</title>
+    <title>McNugget Index Score Calculator</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=McDonalds&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: sans-serif;
+            font-family: 'McDonalds', sans-serif;
             padding: 20px;
+            background-color: #ffffff;
+            color: #333;
+            line-height: 1.6;
+            text-align: center;
         }
-
+        h2 {
+            color: #ffc800;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 2rem;
+            text-shadow: 2px 2px 5px rgba(255, 136, 0, 0.5);
+        }
         label {
+            display: block;
+            width: 100%;
+            font-weight: 500;
+            margin-bottom: 8px;
+            text-align: center;
+            color: #ff6b0f;
+            font-size: 1.2em;
+        }
+        input[type="number"] {
+            width: 80%;
+            max-width: 300px;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            margin: 0 auto 15px auto;
+            display: block;
+            font-family: 'Press Start 2P', sans-serif;
+            background-color: #fff9e6;
+            color: #003893;
+            border-color: #ffb800;
+        }
+        input[type="number"]:focus {
+            border-color: #ffb800;
+            outline: none;
+            box-shadow: 0 4px 10px rgba(255, 200, 0, 0.3);
+        }
+        .small-text {
+            font-size: 0.8rem;
+            color: #555;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 15px;
+            width: 80%;
+            max-width: 300px;
+            text-align: center;
+        }
+        button {
+            background-color: #ffb800;
+            color: #ffffff;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.3s ease;
+            margin-top: 10px;
+            font-family: 'Press Start 2P', sans-serif;
+            box-shadow: 0 6px 0px #b38700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+        }
+        button:hover {
+            background-color: #e6a300;
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 0px #997100;
+        }
+        button:active {
+            background-color: #b38700;
+            transform: translateY(0);
+            box-shadow: 0 3px 0px #7a5d00;
+        }
+        #result {
+            margin-top: 30px;
+            font-size: 1.5rem;
+            color: #e51937;
+            text-align: center;
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+            animation: fadeIn 1s ease, pulse 2s infinite alternate;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.06); }
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+        .gender-select-group button {
+            padding: 12px 25px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: #f8f8f8;
+            color: #333;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.1s ease;
+            font-family: 'Press Start 2P', sans-serif;
+            font-size: 1.1rem;
+            border-color: #ffb800;
+            color: #003893;
+        }
+        .gender-select-group button.selected {
+            background-color: #e51937;
+            color: white;
+            border-color: #e51937;
+            box-shadow: 0 4px 0px #b30e23;
+        }
+        .gender-select-group button:hover {
+            background-color: #f8f8f8;
+            border-color: #ffb800;
+            transform: scale(1.1);
+            color: #003893;
+        }
+        .gender-select-group button:active {
+            background-color: #b30e23;
+            transform: scale(1.0);
+            box-shadow: 0 2px 0px #800717;
+        }
+        #mcNugget арт {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+            transition: transform 0.2s ease;
+            background-image: url('https://github.com/ea88brown/McNuggetIndexCalculator/blob/64d4b5ab267e0b9ee59c3f0786d77945218bc951/images/mcnugget.png?raw=true');
+            background-size: cover;
+            background-repeat: no-repeat;
             display: inline-block;
-            width: 150px;
+        }
+        #mcNugget арт:hover {
+             transform: scale(1.04);
+        }
+        body {
+            background-image: url('https://i.pinimg.com/originals/b8/15/51/b8155178554725f8f98c8e791557a515.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        h2{
+           font-family: 'McDonalds', sans-serif;
+        }
+        button{
+            font-family: 'Press Start 2P', sans-serif;
+        }
+        input[type="number"]{
+             font-family: 'Press Start 2P', sans-serif;
+        }
+       #disclaimer {
+            margin-top: 20px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: #f8f8f8;
+            font-size: 0.9rem;
+            color: #555;
+            text-align: center;
+            font-family: 'Press Start 2P', sans-serif;
+            border-color: #ffb800;
+            background-color: #fff9e6;
+            color: #003893;
+        }
+        /* Extra Styles */
+        #loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            font-size: 1.2rem;
+            z-index: 1000;
+            font-family: 'Press Start 2P', sans-serif;
+        }
+        .hidden {
+            display: none;
+        }
+        #rotator{
+            margin-top: 20px;
+            margin-bottom: 20px;
+            height: 100px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .rotating {
+          animation: rotation 2s infinite linear;
+        }
+        @keyframes rotation {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        .shake {
+          animation: shake 0.5s;
         }
 
-        input[type="number"] {
-            width: 80px;
+        @keyframes shake {
+          0% { transform: translateX(0); }
+          25% { transform: translateX(-5px); }
+          50% { transform: translateX(5px); }
+          75% { transform: translateX(-5px); }
+          100% { transform: translateX(0); }
         }
     </style>
 </head>
-<body>
-    <h2>McNugget Index Calculator</h2>
-    <label>Gender:</label>
-    <input type="radio" id="male" name="gender" value="male" checked>
-    <label for="male">Male</label>
-    <input type="radio" id="female" name="gender" value="female">
-    <label for="female">Female</label><br><br>
-
+<body class="hidden">
+    <div id="loading">Loading...</div>
+    <h2>McNugget Index Score Calculator</h2>
+    <div class="gender-select-group button-group">
+        <button id="male-button" data-gender="male" class="selected">Male</button>
+        <button id="female-button" data-gender="female">Female</button>
+    </div>
     <label id="waistHipLabel" for="waistHip">Waist (inches):</label>
-    <input type="number" id="waistHip"><br><br>
-
+    <input type="number" id="waistHip"><span id="waistHipSubtext" class="small-text">Measure at the narrowest point, about an inch above the naval.</span><br><br>
     <label for="neck">Neck (inches):</label>
-    <input type="number" id="neck"><br><br>
-
+    <input type="number" id="neck"><span class="small-text">Relaxed, measure just above the base of neck.</span><br><br>
     <label for="height">Height (inches):</label>
     <input type="number" id="height"><br><br>
-
     <label for="weight">Weight (pounds):</label>
     <input type="number" id="weight"><br><br>
-
     <label for="idealBF">Ideal Body Fat %:</label>
     <input type="number" id="idealBF"><br><br>
-
     <button onclick="calculateMcNuggetIndex()">Calculate</button><br><br>
-
     <div id="result"></div>
-
+    <div id="rotator">
+        <div id="mcNugget арт" class="rotating"></div>
+    </div>
+     <div id="disclaimer">
+        <p><strong>Disclaimer:</strong> This calculator is for entertainment purposes only.  The McNugget Index Score is not a scientifically valid measure of health or fitness.  Do not use this calculator to make decisions about your diet or exercise.  We are not responsible for any health issues, existential crises, or lawsuits that may arise from your use of this calculator.  You have been warned. Seriously, don't sue us.
+        </p>
+    </div>
     <script>
+        const maleButton = document.getElementById("male-button");
+        const femaleButton = document.getElementById("female-button");
+        let gender = "male";
+        const body = document.querySelector('body');
+        const loadingDiv = document.getElementById('loading');
+
+         window.onload = function() {
+            // Simulate loading time
+            setTimeout(function() {
+                loadingDiv.classList.add('hidden');
+                body.classList.remove('hidden');
+            }, 1000);
+        };
+
+        maleButton.addEventListener("click", () => {
+            gender = "male";
+            maleButton.classList.add("selected");
+            femaleButton.classList.remove("selected");
+            updateWaistHipLabel();
+        });
+        femaleButton.addEventListener("click", () => {
+            gender = "female";
+            femaleButton.classList.add("selected");
+            maleButton.classList.remove("selected");
+            updateWaistHipLabel();
+        });
+
+        function updateWaistHipLabel() {
+            const waistHipLabel = document.getElementById("waistHipLabel");
+            const waistHipSubtext = document.getElementById("waistHipSubtext");
+            if (gender === "male") {
+                waistHipLabel.textContent =  "Waist (inches):";
+                waistHipSubtext.textContent = "Measure at the narrowest point, about an inch above the naval.";
+            } else {
+                waistHipLabel.textContent =  "Hip (inches):";
+                waistHipSubtext.textContent = "Measure at the widest point.";
+            }
+        }
+
         function calculateMcNuggetIndex() {
-            let gender = document.querySelector('input[name="gender"]:checked').value;
-            let waistHip = parseFloat(document.getElementById("waistHip").value);
+            let waistHipValue = parseFloat(document.getElementById("waistHip").value);
             let neck = parseFloat(document.getElementById("neck").value);
             let height = parseFloat(document.getElementById("height").value);
             let weight = parseFloat(document.getElementById("weight").value);
             let idealBF = parseFloat(document.getElementById("idealBF").value);
 
-            // Update Label based on Gender
-            let waistHipLabel = document.getElementById("waistHipLabel");
-            if (gender === "male") {
-                waistHipLabel.textContent = "Waist (inches):";
-                document.getElementById('waistHip').setAttribute('placeholder', 'Waist');
-            } else {
-                waistHipLabel.textContent = "Hip (inches):";
-                document.getElementById('waistHip').setAttribute('placeholder', 'Hip');
-            }
-
+            // Calculations
             let bodyFatPercentage;
             if (gender === "male") {
-                bodyFatPercentage = 86.010 * Math.log10(waistHip - neck) - 70.041 * Math.log10(height) + 36.76;
+                bodyFatPercentage = 86.010 * Math.log10(waistHipValue - neck) - 70.041 * Math.log10(height) + 36.76;
             } else {
-                bodyFatPercentage = 163.205 * Math.log10(waistHip + waistHip - neck) - 97.687 * Math.log10(height) - 78.387;
+                bodyFatPercentage = 163.205 * Math.log10(waistHipValue + waistHipValue - neck) - 97.687 * Math.log10(height) - 78.387;
             }
-
             let fatMass = (bodyFatPercentage / 100) * weight;
             let idealFatMass = (idealBF / 100) * weight;
             let excessFatMass = fatMass - idealFatMass;
-
-            // Calculate number of McNuggets
             let numMcNuggets = Math.round((excessFatMass * 3500) / 41);
+            // Display Score or Blank
+            if (!isNaN(excessFatMass) && !isNaN(numMcNuggets)) {
+                const displayWeight =  excessFatMass.toFixed(2) ;
+                let resultText = "Your McNuggest Index Score is: <b>" + displayWeight +  "!</b><br><br>";
+                if (numMcNuggets > 0) {
+                    resultText += "<sub><i>This means you need to lose approximately: <b>" + numMcNuggets + " McNuggets worth of calories</b> to reach your ideal body fat!</i></sub>";
+                } else if (numMcNuggets === 0) {
+                    resultText += "<sub><i>You're already at your ideal body fat!  No McNuggets to lose!</i></sub>";
+                } else {
+                    resultText += "<sub><i>You are underweight, so you don't need to lose McNuggets!  In fact, you may need to gain some!</i></sub>";
+                }
+                document.getElementById("result").innerHTML = resultText;
+                 // Trigger the shake animation
+                const nuggetImage = document.getElementById("mcNugget арт");
+                nuggetImage.classList.add("shake");
 
-            document.getElementById("result").innerHTML = "You are <b>" + excessFatMass.toFixed(2) + "%</b> McNugget!<br><br><sub><i>This means you need to lose approximately: <b>" + numMcNuggets + " McNuggets</b> to reach your ideal body fat!</i></sub>";
+                // Remove the class after the animation completes
+                setTimeout(() => {
+                    nuggetImage.classList.remove("shake");
+                }, 500);
+            } else {
+                document.getElementById("result").innerHTML = ""; // Blank if no calculation
+            }
         }
-
-        // Add event listener to gender radio buttons
-        let genderRadios = document.querySelectorAll('input[name="gender"]');
-        genderRadios.forEach(radio => {
-            radio.addEventListener('change', calculateMcNuggetIndex);
-        });
-
-        //Call the function on load to set the correct label.
-        calculateMcNuggetIndex();
+        //Set default labels
+        updateWaistHipLabel();
     </script>
 </body>
 </html>
